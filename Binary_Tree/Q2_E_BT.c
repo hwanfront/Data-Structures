@@ -95,9 +95,48 @@ int main()
 //////////////////////////////////////////////////////////////////////////////////
 
 int maxHeight(BTNode *node)
-
 {
-    /* add your code here */
+    if (node == NULL) {
+        return -1;
+    }
+    Stack *stack = malloc(sizeof(Stack));
+    BTNode *pre;
+    BTNode *cur;
+    int result = -1;
+    int height = -1;
+    stack->top = NULL;
+    pre = NULL;
+    cur = node;
+
+    while (1) {
+        if (cur == NULL && stack->top == NULL) {
+            break;
+        }
+
+        while (1) {
+            if (cur == NULL) {
+                break;
+            }
+            push(stack, cur);
+            cur = cur->left;
+            if (result < ++height) {
+                result = height;
+            }
+        }
+        cur = pop(stack);
+
+        if (cur->right == NULL || cur->right == pre) {
+            pre = cur;
+            cur = NULL;
+            --height;
+            continue;
+        }
+        push(stack, cur);
+        cur = cur->right;
+    }
+
+	free(stack);
+    return result;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

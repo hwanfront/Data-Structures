@@ -100,9 +100,29 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-int smallestValue(BTNode *node)
+int smallestValue(BTNode *node) 
 {
-	/* add your code here */
+    Stack *stack = malloc(sizeof(Stack));
+    BTNode *cur;
+    int max = 2147483637;
+    stack->top = NULL;
+    push(stack, node);
+    while (1) {
+        if (stack->top == NULL) {
+            break;
+        }
+        cur = pop(stack); 
+        if (cur->item < max) {
+            max = cur->item;
+        }
+        if (cur->left != NULL) {
+            push(stack, cur->left);
+        }
+        if (cur->right != NULL) {
+            push(stack, cur->right);
+        }
+    }
+    return max;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
