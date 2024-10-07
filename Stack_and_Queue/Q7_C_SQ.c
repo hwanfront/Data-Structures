@@ -130,8 +130,10 @@ int balanced(char *expression)
 		return 1;
 	}
 	if (isEmptyStack(s)) {
+		free(s);
 		return 0;
 	}
+	free(s);
 	return 1;
 }
 
