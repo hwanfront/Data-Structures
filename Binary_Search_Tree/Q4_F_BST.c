@@ -91,31 +91,31 @@ int main()
 
 void postOrderIterativeS1(BSTNode *root)
 {
-	Stack *stack = malloc(sizeof(Stack));
+	Stack stack;
 	BSTNode *pre;
 	BSTNode *cur;
-	stack->top = NULL;
+	stack.top = NULL;
 	pre = NULL;
 	cur = root;
 	while (1) {
-		if (cur == NULL && isEmpty(stack)) {
+		if (cur == NULL && isEmpty(&stack)) {
 			break;
 		}
 		while (1) {
 			if (cur == NULL) {
 				break;
 			}
-			push(stack, cur);
+			push(&stack, cur);
 			cur = cur->left;
 		}
-		cur = pop(stack);
+		cur = pop(&stack);
 		if (cur->right == NULL || cur->right == pre) {
 			printf("%d ", cur->item);
 			pre = cur;
 			cur = NULL;
 			continue;
 		}
-		push(stack, cur);
+		push(&stack, cur);
 		cur = cur->right;
 	}
 }

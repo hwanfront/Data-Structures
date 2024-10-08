@@ -108,27 +108,25 @@ void printSmallerValues(BTNode *node, int m)
     if (node == NULL) {
         return;
     }
-    Stack *stack = malloc(sizeof(Stack));
+    Stack stack;
     BTNode *cur;
-    stack->top = NULL;
-    push(stack, node);
+    stack.top = NULL;
+    push(&stack, node);
     while (1) {
-        if (stack->top == NULL) {
+        if (stack.top == NULL) {
             break;
         }
-        cur = pop(stack);
+        cur = pop(&stack);
         if (cur->item < m) {
             printf("%d ", cur->item);
         }
         if (cur->right != NULL) {
-            push(stack, cur->right);
+            push(&stack, cur->right);
         }
         if (cur->left != NULL) {
-            push(stack, cur->left);
+            push(&stack, cur->left);
         }
     }
-
-    free(stack);
 }
 
 //////////////////////////////////////////////////////////////////////////////////

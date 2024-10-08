@@ -99,17 +99,17 @@ int maxHeight(BTNode *node)
     if (node == NULL) {
         return -1;
     }
-    Stack *stack = malloc(sizeof(Stack));
+    Stack stack;
     BTNode *pre;
     BTNode *cur;
     int result = -1;
     int height = -1;
-    stack->top = NULL;
+    stack.top = NULL;
     pre = NULL;
     cur = node;
 
     while (1) {
-        if (cur == NULL && stack->top == NULL) {
+        if (cur == NULL && stack.top == NULL) {
             break;
         }
 
@@ -117,13 +117,13 @@ int maxHeight(BTNode *node)
             if (cur == NULL) {
                 break;
             }
-            push(stack, cur);
+            push(&stack, cur);
             cur = cur->left;
             if (result < ++height) {
                 result = height;
             }
         }
-        cur = pop(stack);
+        cur = pop(&stack);
 
         if (cur->right == NULL || cur->right == pre) {
             pre = cur;
@@ -131,11 +131,10 @@ int maxHeight(BTNode *node)
             --height;
             continue;
         }
-        push(stack, cur);
+        push(&stack, cur);
         cur = cur->right;
     }
 
-	free(stack);
     return result;
 }
 

@@ -104,15 +104,15 @@ int countOneChildNodes(BTNode *node)
         return 0;
     }
 
-    Stack *stack = malloc(sizeof(Stack));
+    Stack stack;
     BTNode *pre;
     BTNode *cur;
     int result = 0;
-    stack->top = NULL;
+    stack.top = NULL;
     pre = NULL;
     cur = node;
     while (1) {
-        if (cur == NULL && stack->top == NULL) {
+        if (cur == NULL && stack.top == NULL) {
             break;
         }
 
@@ -120,20 +120,20 @@ int countOneChildNodes(BTNode *node)
             if (cur == NULL) {
                 break;
             }
-            push(stack, cur);
+            push(&stack, cur);
             if ((cur->left == NULL && cur->right != NULL) || (cur->left != NULL && cur->right == NULL)) {
                 result++;
             }
             cur = cur->left;
         }
-        cur = pop(stack);
+        cur = pop(&stack);
         if (cur->right == NULL || cur->right == pre) {
             pre = cur;
             cur = NULL;
             continue;
         }
 
-        push(stack, cur);
+        push(&stack, cur);
         cur = cur->right;
     }
     return result;
