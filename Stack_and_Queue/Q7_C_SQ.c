@@ -105,35 +105,35 @@ int main()
 int balanced(char *expression)
 {
 	printf("%s\n", expression);	
-	Stack *s = malloc(sizeof(Stack));
-	int index = 0;
+	Stack stack;
+	stack.ll.head = NULL;
+	stack.ll.size = 0;
+	
 	for(int i = 0; expression[i]; i++) {
-		if (isEmptyStack(s)) {
+		if (isEmptyStack(&stack)) {
 			if (expression[i] == ')' || expression[i] == '}' || expression[i] == ']') {
 				return 1;
 			}
-			push(s, expression[i]);
+			push(&stack, expression[i]);
 			continue;
 		}
 		if (expression[i] == '(' || expression[i] == '{' || expression[i] == '[') {
-			push(s, expression[i]);
+			push(&stack, expression[i]);
 			continue;
 		}
-		if (!isEmptyStack(s)) {
-			if ((peek(s) == '(' && expression[i] == ')') 
-			|| (peek(s) == '{' && expression[i] == '}') 
-			|| (peek(s) == '[' && expression[i] == ']')) {
-				pop(s);
+		if (!isEmptyStack(&stack)) {
+			if ((peek(&stack) == '(' && expression[i] == ')') 
+			|| (peek(&stack) == '{' && expression[i] == '}') 
+			|| (peek(&stack) == '[' && expression[i] == ']')) {
+				pop(&stack);
 				continue;
 			}
 		}
 		return 1;
 	}
-	if (isEmptyStack(s)) {
-		free(s);
+	if (isEmptyStack(&stack)) {
 		return 0;
 	}
-	free(s);
 	return 1;
 }
 
