@@ -293,14 +293,3 @@ void removeAll(BSTNode **node)
 		*node = NULL;
 	}
 }
-
-
-	// if (root == NULL) {
-	// 	return NULL;
-	// }
-	// BSTNode *node = malloc(sizeof(BSTNode));
-	// printf("%d ", root->item);
-	// node->item = root->item;
-	// node->left = removeNodeFromTree(root->left, value);
-	// node->right = removeNodeFromTree(root->right, value);
-	// return node;
